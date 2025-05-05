@@ -1,0 +1,48 @@
+class SugarSample:
+    def __init__(self, pH, brix):
+        self.pH = pH
+        self.brix = brix
+
+    def classify(self):
+        # Classification based on pH and Brix
+        if self.pH <= 6.42 and self.brix <= 19.5:
+            return "Real Fresh Sugar"
+        else:
+            return "Not Real Sugar"
+
+def get_user_input():
+    # Getting input from the user
+    try:
+        pH = float(input("Enter the pH of the sugar sample: "))
+        brix = float(input("Enter the Brix of the sugar sample: "))
+        return SugarSample(pH, brix)
+    except ValueError:
+        print("Invalid input! Please enter valid numerical values for pH and Brix.")
+        return None
+
+def classify_sugar_samples():
+    # Ask the user for the number of samples they want to classify
+    try:
+        num_samples = int(input("How many sugar samples do you want to classify?: "))
+    except ValueError:
+        print("Invalid input! Please enter a valid number.")
+        return
+    
+    results = []
+    for i in range(num_samples):
+        print(f"\nEntering details for Sample {i + 1}:")
+        sample = get_user_input()
+        if sample:
+            result = sample.classify()
+            results.append(result)
+        else:
+            results.append("Invalid sample data")
+
+    # Print classification results
+    print("\nClassification Results:")
+    for i, result in enumerate(results):
+        print(f"Sample {i + 1}: {result}")
+
+# Run the program
+if __name__ == "__main__":
+    classify_sugar_samples()
